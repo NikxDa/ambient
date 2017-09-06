@@ -22,7 +22,7 @@ ambient.render ();
 ```
 
 Output:
-![QuickStart Output](/images/quickstart.png)
+![QuickStart Output](/images/quickstart-preview.png)
 
 ## License
 MIT
