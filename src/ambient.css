@@ -4,18 +4,18 @@
 	base64-css by passing the { includeCSS: false } option into the constructor.
 */
 
-.ambilight__container {
+.ambient__container {
 	position: relative;
 }
 
-.ambilight__visible {
+.ambient__visible {
 	display: block;
 	position: relative;
 	z-index: 10;
 	width: 100%;
 }
 
-.ambilight__shadow {
+.ambient__shadow {
 	display: block;
 	position: absolute;
 	width: 100%;

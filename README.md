@@ -1,8 +1,8 @@
-# ambient.js
+![AmbientJS Logo](/images/ambientjs-logo.png)
 A JavaScript Ambient Light Library. Lightweight. Fast. Portable.
 
 ## Quick Start
-First of all, include `ambient.js` into your HTML head tag.
+**Step 1:** Include `ambient.js` in your HTML file.
 ```html
 <head>
 	...
@@ -12,19 +12,18 @@ First of all, include `ambient.js` into your HTML head tag.
 ```
 
 
-After that, you can add the `data-ambient` tag to any `img` or `video` object you want.
+**Step 2:** Add the `data-ambient` tag to any `img` or `video` element you want.
 ```html
 <img alt="An image" src="https://images.unsplash.com/photo-1466854076813-4aa9ac0fc347" data-ambient>
 ```
 
 
-Last thing you have to do is initialize a new `Ambient`-instance and render the elements.
-```js
+**Step 3:** Initialize a new `Ambient`-instance and call the `render ()`-function.
 var ambient = new Ambient ();
 ambient.render ();
 ```
 
-Output:
+That's it! Output:
 ![QuickStart Output](/images/quickstart-preview.png)
 
 ## License

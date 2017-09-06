@@ -1,6 +1,6 @@
-var Ambilight = (function () {
+var Ambient = (function () {
 	// Constructor
-	function Ambilight (options) {
+	function Ambient (options) {
 		// If no options are provided, use empty object
 		options = options || {};
 
@@ -11,31 +11,31 @@ var Ambilight = (function () {
 
 		// Should the base64-styles be applied?
 		if (this.options.includeCSS) {
-			// Apply our custom ambilight-styles
+			// Apply our custom ambient-styles
 			applyDefaultStyles ();
 		}
 	}
 
-	// Renders all ambilight elements
-	Ambilight.prototype.render = function () {
-		// Find all images that should have ambilight
-		var images = document.querySelectorAll ("img[data-ambilight]");
+	// Renders all ambient elements
+	Ambient.prototype.render = function () {
+		// Find all images that should have ambient
+		var images = document.querySelectorAll ("img[data-ambient]");
 
 		// Render all images
 		for (var i = 0; i < images.length; i++)
 			renderImage (images [i]);
 
-		// Find all videos that should have ambilight
-		var videos = document.querySelectorAll ("video[data-ambilight]");
+		// Find all videos that should have ambient
+		var videos = document.querySelectorAll ("video[data-ambient]");
 
 		// Render all videos
 		for (var i = 0; i < videos.length; i++) 
 			renderVideo (videos [i]);
 	}
 
-	Ambilight.prototype.discard = function () {
+	Ambient.prototype.discard = function () {
 		// Find all shadow elements
-		var shadowElements = document.querySelectorAll (".ambilight__shadow");
+		var shadowElements = document.querySelectorAll (".ambient__shadow");
 
 		// Hide them
 		shadowElements.forEach (function (element) {
@@ -49,23 +49,23 @@ var Ambilight = (function () {
 
 		// Main container where the video will go
 		var container = document.createElement ("div");
-		container.className = "ambilight__container";
+		container.className = "ambient__container";
 
 		// Set the id, so that CSS is transferrable
-		if (element.getAttribute ("data-ambilight").length > 0)
-			container.id = element.getAttribute ("data-ambilight");
+		if (element.getAttribute ("data-ambient").length > 0)
+			container.id = element.getAttribute ("data-ambient");
 
 		// Create two new elements
 		// The visible element will retain classes it has
 		var visibleElement = element.cloneNode (true);
-		visibleElement.classList.add ("ambilight__visible");
+		visibleElement.classList.add ("ambient__visible");
 
 		// The shadow element will be a plain one
 		var shadowElement = document.createElement ("canvas");
-		shadowElement.className = "ambilight__shadow";
+		shadowElement.className = "ambient__shadow";
 
-		// Remove the data-ambilight attribute to avoid confusion
-		visibleElement.removeAttribute ("data-ambilight");
+		// Remove the data-ambient attribute to avoid confusion
+		visibleElement.removeAttribute ("data-ambient");
 
 		// Add the time change event listeners
 		(function (video, canvas) {
@@ -112,25 +112,25 @@ var Ambilight = (function () {
 	function renderImage (imgElement) {
 		// Main container where the image will go
 		var container = document.createElement ("div");
-		container.className = "ambilight__container";
+		container.className = "ambient__container";
 
 		// Set the id, so that CSS is transferrable
-		if (imgElement.getAttribute ("data-ambilight").length > 0)
-			container.id = imgElement.getAttribute ("data-ambilight");
+		if (imgElement.getAttribute ("data-ambient").length > 0)
+			container.id = imgElement.getAttribute ("data-ambient");
 
 		// Create two new elements
 		// The visible element will retain classes it has
 		var visibleElement = imgElement.cloneNode (true);
-		visibleElement.classList.add ("ambilight__visible");
+		visibleElement.classList.add ("ambient__visible");
 
 		// The shadow element will be a plain one
 		var shadowElement = document.createElement ("img");
-		shadowElement.className = "ambilight__shadow";
+		shadowElement.className = "ambient__shadow";
 		shadowElement.src = visibleElement.src;
 
-		// Remove the data-ambilight attribute to avoid confusion
-		visibleElement.removeAttribute ("data-ambilight");
-		shadowElement.removeAttribute ("data-ambilight");
+		// Remove the data-ambient attribute to avoid confusion
+		visibleElement.removeAttribute ("data-ambient");
+		shadowElement.removeAttribute ("data-ambient");
 
 		// The image might still change, listen for that
 		(function (visible, shadow) {
@@ -162,10 +162,10 @@ var Ambilight = (function () {
 		}
 	}
 
-	// Applies the default ambilight styles
+	// Applies the default ambient styles
 	function applyDefaultStyles () {
 		// This is a base64-encoded stylesheet, which I include here so you don't have to :)
-		var defaultStyle = "LmFtYmlsaWdodF9fY29udGFpbmVye3Bvc2l0aW9uOnJlbGF0aXZlfS5hbWJpbGlnaHRfX3Zpc2libGV7ZGlzcGxheTpibG9jaztwb3NpdGlvbjpyZWxhdGl2ZTt6LWluZGV4OjEwO3dpZHRoOjEwMCV9LmFtYmlsaWdodF9fc2hhZG93e2Rpc3BsYXk6YmxvY2s7cG9zaXRpb246YWJzb2x1dGU7d2lkdGg6MTAwJTtoZWlnaHQ6MTAwJTt6LWluZGV4OjU7bGVmdDowO3RvcDowOy13ZWJraXQtZmlsdGVyOmJsdXIoNDVweCk7LW1vei1maWx0ZXI6Ymx1cig0NXB4KTstbXMtZmlsdGVyOmJsdXIoNDVweCk7ZmlsdGVyOmJsdXIoNDVweCl9";
+		var defaultStyle = "LmFtYmllbnRfX2NvbnRhaW5lciwuYW1iaWVudF9fdmlzaWJsZXtwb3NpdGlvbjpyZWxhdGl2ZX0uYW1iaWVudF9fdmlzaWJsZXtkaXNwbGF5OmJsb2NrO3otaW5kZXg6MTA7d2lkdGg6MTAwJX0uYW1iaWVudF9fc2hhZG93e2Rpc3BsYXk6YmxvY2s7cG9zaXRpb246YWJzb2x1dGU7d2lkdGg6MTAwJTtoZWlnaHQ6MTAwJTt6LWluZGV4OjU7bGVmdDowO3RvcDowOy13ZWJraXQtZmlsdGVyOmJsdXIoNDVweCk7LW1vei1maWx0ZXI6Ymx1cig0NXB4KTstbXMtZmlsdGVyOmJsdXIoNDVweCk7ZmlsdGVyOmJsdXIoNDVweCl9";
 		
 		// Style element
 		var styleEl = document.createElement ("style");
@@ -177,5 +177,5 @@ var Ambilight = (function () {
 	}
 
 	// Return the wrapped object
-	return Ambilight;
+	return Ambient;
 })();
