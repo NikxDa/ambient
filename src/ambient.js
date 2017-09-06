@@ -124,8 +124,9 @@ var Ambilight = (function () {
 		visibleElement.classList.add ("ambilight__visible");
 
 		// The shadow element will be a plain one
-		var shadowElement = imgElement.cloneNode (true);
+		var shadowElement = document.createElement ("img");
 		shadowElement.className = "ambilight__shadow";
+		shadowElement.src = visibleElement.src;
 
 		// Remove the data-ambilight attribute to avoid confusion
 		visibleElement.removeAttribute ("data-ambilight");
