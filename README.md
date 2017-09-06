@@ -19,6 +19,7 @@ A JavaScript Ambient Light Library. Lightweight. Fast. Portable.
 
 
 **Step 3:** Initialize a new `Ambient`-instance and call the `render ()`-function.
+```js
 var ambient = new Ambient ();
 ambient.render ();
 ```
