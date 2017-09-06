@@ -1,4 +1,4 @@
-![AmbientJS Logo](/images/ambientjs-logo.png)
+<img src="/images/ambientjs-logo.png" width="50%">
 A JavaScript Ambient Light Library. Lightweight. Fast. Portable.
 
 ## Quick Start
