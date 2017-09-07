@@ -99,7 +99,7 @@ If you do not want this to happen, simply set the `insertCSS` option to `false` 
 Since the CSS data is missing when you do this, you will have to include the `ambient.min.css` file into the HTML manually.
 
 ## Known issues
-[] When initializing Ambient with the `retainAttributes` option set to `false`, a call to `unmount ()` will not restore the original attributes.
+* When initializing Ambient with the `retainAttributes` option set to `false`, a call to `unmount ()` will not restore the original attributes.
 
 ## Contributing
 Contributions are always welcome! Feel free to send a pull request, it'll be reviewed and then merged if possible.
