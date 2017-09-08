@@ -75,14 +75,17 @@ Any attribute the image has will be retained and copied over to the new image el
 
 If you do not want to retain the attributes the image has before Ambient.js kicks in, you may set the `retainAttributes` option to `false` when Ambient is initialized.
 
-#### Styling the image wrapper
+## Styling the image wrapper
 When applying styles, keep in mind that the image you are styling is now at a completely different position inside the document. You should now consider styling the outer container,
-because the image will be styled to completely fill it by default. Note that the container has to have its `position` property set to `relative`. If you need to position the image absolutely, 
-you should wrap another `div` element around it, and set this one to have an absolute position.
+because the image will be styled to completely fill it by default. This is also the reason why, by default, any attribute the original image has will not be retained - it most probably would not 
+make sense to have these styles in the new context.
 
 One might notice that there is no way to differentiate between multiple containers. Ambient.js provides a simple solution for this:
 When the `data-ambient` attribute is not only set, but contains a value, the `id` attribute of the container will reflect this value. This allows
 for easy control over a big amount of containers. 
+
+Note that the container has to have its `position` property set to `relative`. If you need to position the image absolutely, 
+you should wrap another `div` element around it, and set this one to have an absolute position.
 
 **Example:**
 
@@ -99,7 +102,7 @@ If you do not want this to happen, simply set the `insertCSS` option to `false` 
 Since the CSS data is missing when you do this, you will have to include the `ambient.min.css` file into the HTML manually.
 
 ## Known issues
-* When initializing Ambient with the `retainAttributes` option set to `false`, a call to `unmount ()` will not restore the original attributes.
+* ~~When initializing Ambient with the `retainAttributes` option set to `false`, a call to `unmount ()` will not restore the original attributes.~~
 
 ## Contributing
 Contributions are always welcome! Feel free to send a pull request, it'll be reviewed and then merged if possible.

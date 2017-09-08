@@ -1,25 +1,28 @@
 var AmbientElement = (function () {
-	function AmbientElement (container) {
+	function AmbientElement (container, attributes) {
 		// Save the name
 		this.name = container.getAttribute ("id") || undefined;
+
+		// Save the attributes
+		this.originalAttributes = attributes || [];
 
 		// Save the element
 		this.container = container;
 
 		// Save the shadow element
-		this.shadowElement = this.container.querySelector (".ambient__shadow");
+		this._shadowElement = this.container.querySelector (".ambient__shadow");
 	}
 
 	AmbientElement.prototype.disable = function () {
 		// Hide the shadow element if neccessary
-		if (this.shadowElement.style.display !== "none")
-			this.shadowElement.style.display = "none";
+		if (this._shadowElement.style.display !== "none")
+			this._shadowElement.style.display = "none";
 	}
 
 	AmbientElement.prototype.enable = function () {
 		// Show the shadow element if neccessary
-		if (this.shadowElement.style.display !== "block")
-			this.shadowElement.style.display = "block ";
+		if (this._shadowElement.style.display !== "block")
+			this._shadowElement.style.display = "block ";
 	}
 
 	// Return the wrapped object
@@ -39,7 +42,7 @@ var Ambient = (function () {
 		// Merge custom and default options
 		this.options = Object.assign ({
 			insertCSS: true, // true inserts the CSS via base64
-			retainAttributes: true, // true keeps attributes when wrapping images or videos
+			retainAttributes: false, // false removes attributes when wrapping images or videos
 			blur: -1 // -1 uses default value of 45px
 		}, options);
 
@@ -92,6 +95,18 @@ var Ambient = (function () {
 			visibleElement.classList.remove ("ambient__visible");
 			visibleElement.setAttribute ("data-ambient", (ambientElement.name || ""));
 
+			// Reset the attributes
+			for (var i = 0; i < ambientElement.originalAttributes.length; i++) {
+				// Get current attribute
+				var attribute = ambientElement.originalAttributes [i];
+
+				// Attribute already set or different from the current value?
+				if (!visibleElement.hasAttribute (attribute.name) || visibleElement.getAttribute (attribute.name) !== attribute.value) {
+					// Set attribute
+					visibleElement.setAttribute (attribute.name, attribute.value);
+				}
+			}
+
 			// Reposition the visible element
 			container.parentNode.insertBefore (visibleElement, container);
 
@@ -115,11 +130,17 @@ var Ambient = (function () {
 		if (element.getAttribute ("data-ambient").length > 0)
 			container.id = element.getAttribute ("data-ambient");
 
-		// Create two new elements
+		// Create new elements
 		var visibleElement = element.cloneNode (true);
+
+		// Arguments to save for unmounting
+		var originalAttributes = [];
 
 		// Should attributes be retained?
 		if (!_retainAttributes) {
+			// Save the current attributes
+			originalAttributes = visibleElement.attributes;
+
 			// Iterate over all attributes
 			for (var i = 0; i < visibleElement.attributes.length; i++) {
 				// Grab the attribute name
@@ -187,7 +208,7 @@ var Ambient = (function () {
 		element.parentNode.removeChild (element);
 
 		// Return AmbientElement
-		return new AmbientElement (container);
+		return new AmbientElement (container, originalAttributes);
 	}
 
 	// Renders an image to be ambi-lit. (hah!)
@@ -200,13 +221,19 @@ var Ambient = (function () {
 		if (imgElement.getAttribute ("data-ambient").length > 0)
 			container.id = imgElement.getAttribute ("data-ambient");
 
-		// Create two new elements
+		// Create new elements
 		var visibleElement;
+
+		// Array to reset original attributes when unmounting
+		var originalAttributes = [];
 
 		// Should attributes be retained?
 		if (_retainAttributes)
 			visibleElement = imgElement.cloneNode ();
 		else {
+			// Save current attributes
+			originalAttributes = imgElement.attributes;
+
 			// Create element from scratch
 			visibleElement = document.createElement ("img");
 
@@ -249,7 +276,7 @@ var Ambient = (function () {
 		imgElement.parentNode.removeChild (imgElement);
 
 		// Return AmbientElement
-		return new AmbientElement (container);
+		return new AmbientElement (container, originalAttributes);
 	}
 
 	// Sets the blur filter of an element
