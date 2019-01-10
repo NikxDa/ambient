@@ -4,10 +4,6 @@ A JavaScript Ambient Light Library. Lightweight. Fast. Portable.
 ## Description
 Ambient.js is a lightweight and flexible JavaScript library that adds ambient lighting to any `<img>` or `<video>` tags.
 
-## Live demo
-A live demonstration is available at https://nikx.io/ambient.
-You may check out the console there aswell, it provides ready-to-inspect objects.
-
 ## Installation
 To install ambient, simply download the script file (minified version is recommended) and 
 insert it into your HTML-file, either in the `<head>`-tag or right before the end of the `<body>`-tag.
